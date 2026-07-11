@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f5f5f5;
+      }
+      .container {
+        text-align: center;
+      }
+      p {
+        color: #555;
+      }
+      a {
+        color: #0078d4;
+      }
+      #countdown {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Redirecting...</h1>
+      <p>You will be redirected in <span id="countdown">0</span> seconds.</p>
+      <p>
+        If not redirected automatically,
+        <a id="redirect-link" href="#">click here</a>.
+      </p>
+    </div>
+    <script>
+      const REDIRECT_URL = "https://github.com"; // REPLACE THIS REDIRECT_URL
+      document
+        .querySelector('meta[http-equiv="refresh"]')
+        .setAttribute("content", `0; url=${REDIRECT_URL}`);
+      document.getElementById("redirect-link").href = REDIRECT_URL;
+
+      let seconds = 0;
+      const countdown = document.getElementById("countdown");
+      const timer = setInterval(() => {
+        seconds--;
+        countdown.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          window.location.href = REDIRECT_URL;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
